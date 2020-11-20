@@ -4,11 +4,12 @@ class App {
     console.error(error);
   }
   handleGetGradesSuccess(grades) {
-    console.log(grades)
+    this.gradeTable.updateGrades(grades);
   }
-  constructor() {
+  constructor(gradeTable) {
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
     this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this)
+    this.gradeTable = gradeTable;
   }
   getGrades() {
     var ajaxConfig = {

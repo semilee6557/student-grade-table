@@ -3,6 +3,7 @@ class GradeTable {
     this.tableElement = tableElement
   }
   updateGrades(grades) {
+    console.log(grades);
     var tbody = this.tableElement.querySelector("tbody");
     tbody.textContent = ""
     for (var i = 0; i < grades.length; i++) {
@@ -11,10 +12,11 @@ class GradeTable {
       var tdCourse = document.createElement("td")
       var tdGrade = document.createElement("td")
 
-      tdName.textContent = grades.name;
-      tdCourse.textContent = grades.course;
-      tdGrade.textContent = grades.grade;
+      tdName.textContent = grades[i].name;
+      tdCourse.textContent = grades[i].course;
+      tdGrade.textContent = grades[i].grade;
 
+      console.log(tdName, tdCourse, tdGrade);
       tr.append(tdName, tdCourse, tdGrade);
 
       tbody.append(tr)

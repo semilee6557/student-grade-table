@@ -19,6 +19,9 @@ class App {
     this.gradeForm = gradeForm;
     this.gradeTable = gradeTable;
     this.pagerHeader = pagerHeader;
+    this.deleteGrade = this.deleteGrade.bind(this);
+    this.handleDeleteGradeError = this.handleDeleteGradeError.bind(this);
+    this.handleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this);
   }
   getGrades() {
     var ajaxConfig = {
@@ -56,5 +59,14 @@ class App {
       }
     }
     $.ajax("https://sgt.lfzprototypes.com/api/grades", ajaxConfig)
+  }
+  deleteGrade(id){
+    console.log(id);
+  }
+  handleDeleteGradeError(error){
+    console.error();
+  }
+  handleDeleteGradeSuccess(){
+    this.getGrades()
   }
 }

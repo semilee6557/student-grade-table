@@ -12,9 +12,10 @@ class App {
     var average = total / grades.length;
     this.pagerHeader.updateAverage(average);
   }
-  constructor(gradeTable, pagerHeader) {
+  constructor(gradeTable, pagerHeader, gradeForm) {
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
-    this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this)
+    this.handleGetGradesSuccess = this.handleGetGradesSuccess.bind(this);
+    this.gradeForm = gradeForm;
     this.gradeTable = gradeTable;
     this.pagerHeader = pagerHeader;
   }

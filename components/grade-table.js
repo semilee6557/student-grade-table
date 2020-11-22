@@ -4,41 +4,46 @@ class GradeTable {
     this.noGradesElement = noGradesElement;
   }
   updateGrades(grades) {
-    this.renderGradeRow(grades, this.deleteGrade);
-
-    if (grades) {
-      var p = document.querySelector('p');
+    var tbody = this.tableElement.querySelector("tbody");
+    tbody.innerHTML = ""
+    for (var i = 0; i < grades.length; i++) {
+      var tr = this.renderGradeRow(grades[i], this.deleteGrade);
+      tbody.append(tr)
+    }
+console.log(grades)
+var p = document.querySelector('p');
+    if (grades.length) {
+      console.log(p)
       p.className = "d-none";
     } else {
+      console.log(p)
       p.className = "";
     }
-
   }
   onDeleteClick(deleteGrade) {
     this.deleteGrade = deleteGrade;
   }
   renderGradeRow(data, deleteGrade) {
-    var tbody = this.tableElement.querySelector("tbody");
-    for (var i = 0; i < data.length; i++) {
-      var tr = document.createElement("tr")
-      var tdName = document.createElement("td")
-      var tdCourse = document.createElement("td")
-      var tdGrade = document.createElement("td")
-      var tdButton = document.createElement("td")
+    var tr = document.createElement("tr")
+    var tdName = document.createElement("td")
+    var tdCourse = document.createElement("td")
+    var tdGrade = document.createElement("td")
+    var tdButton = document.createElement("td")
+    var button = document.createElement("button")
 
-
-      tdName.textContent = data[i].name;
-      tdCourse.textContent = data[i].course;
-      tdGrade.textContent = data[i].grade;
-      tdButton.innerHTML = '<button type="button" class="btn btn-danger">DELETE</button>'
-
-      tr.append(tdName, tdCourse, tdGrade, tdButton);
-
-      tbody.append(tr)
-    }
-    var deleteBtn = this.tableElement.querySelector("button");
-    deleteBtn.addEventListener("click", function () {
+    tdName.textContent = data.name;
+    tdCourse.textContent = data.course;
+    tdGrade.textContent = data.grade;
+    button.className = "btn btn-danger";
+    button.textContent = "DELETE"
+    button.addEventListener("click", function () {
       deleteGrade(data.id)
     });
+    tdButton.append(button);
+
+    tr.append(tdName, tdCourse, tdGrade, tdButton);
+
+
+    return tr
   }
 }

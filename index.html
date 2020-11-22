@@ -40,17 +40,17 @@
             <tbody>
             </tbody>
           </table>
+          <p class="d-none">No Grades Recorded</p>
         </div>
         <div class="col">
 
-          <p class="d-none">No Grades Recorded</p>
 
           <form>
             <div class="col-auto">
               <label class="sr-only" for="inlineFormInputGroup"></label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text">e</div>
+                  <div class="input-group-text"><i class="fas fa-user-graduate"></i></div>
                 </div>
                 <input type="text" name="name" class="form-control" id="inlineFormInputGroup"
                   placeholder="Student Name">
@@ -61,7 +61,7 @@
               <label class="inputPassword3" for="inlineFormInputGroup"></label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text">P</div>
+                  <div class="input-group-text"><i class="fas fa-calendar"></i></div>
                 </div>
                 <input type="text" name="course" class="form-control" id="inputPassword3" placeholder="Course">
               </div>
@@ -71,14 +71,14 @@
               <label class="grade" for="inlineFormInputGroup"></label>
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text">G</div>
+                  <div class="input-group-text"><i class="fas fa-graduation-cap"></i></div>
                 </div>
                 <input type="text" name="grade" class="form-control" id="grade" placeholder="Grade">
               </div>
             </div>
 
-            <div class="form-group row justify-content-end">
-              <div class="col-sm-10">
+            <div class="form-group">
+              <div class="row col-auto justify-content-end">
                 <button type="submit" class="btn btn-success">Add</button>
                 <button type="reset" class="btn btn-outline-dark">Cancel</button>
               </div>

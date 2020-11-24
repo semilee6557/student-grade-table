@@ -73,7 +73,6 @@ class App {
       error: this.handleDeleteGradeError
     };
     $.ajax("https://sgt.lfzprototypes.com/api/grades/" + id, appConfig)
-    console.log(id);
   }
   handleDeleteGradeError(error) {
     console.error();

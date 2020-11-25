@@ -10,13 +10,10 @@ class GradeTable {
       var tr = this.renderGradeRow(grades[i], this.deleteGrade);
       tbody.append(tr)
     }
-console.log(grades)
 var p = document.querySelector('p');
     if (grades.length) {
-      console.log(p)
       p.className = "d-none";
     } else {
-      console.log(p)
       p.className = "";
     }
   }

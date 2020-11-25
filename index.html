@@ -12,11 +12,11 @@
   <div class="container mt-3">
 
     <header class="container mb-4">
-      <div class="row justify-content-between">
-        <div class="col-sm-auto">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-6 text-center text-lg-left">
           <h1>Student Grade Table</h1>
         </div>
-        <div class="col-sm-auto">
+        <div class="col-12 col-lg-6 text-center text-lg-right">
           <h3>
             Average Grage
             <span class="badge badge-secondary"></span>
@@ -24,70 +24,70 @@
         </div>
       </div>
     </header>
+    <hr>
 
     <div class="container">
       <div class="row">
-        <div class="col-8">
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th scope="col">Student Name</th>
-                <th scope="col">Course</th>
-                <th scope="col">Grade</th>
-                <th scope="col">Operation</th>
-              </tr>
-            </thead>
-            <tbody>
-            </tbody>
-          </table>
-          <p class="d-none">No Grades Recorded</p>
-        </div>
-        <div class="col">
+          <div class="col-12 col-lg-8">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Course</th>
+                  <th scope="col">Grade</th>
+                  <th scope="col">Operation</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+            <p class="d-none">No Grades Recorded</p>
+          </div>
+          <div class="col-12 col-lg-4">
 
+            <form class="row">
 
-          <form>
-            <div class="col-auto">
-              <label class="sr-only" for="inlineFormInputGroup"></label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fas fa-user-graduate"></i></div>
+              <div class="col-12 text-center mb-2">
+                <h2>Add Grade</h2>
+              </div>
+
+              <div class="col-12">
+                <label class="sr-only" for="inlineFormInputGroup"></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fas fa-user-graduate"></i></div>
+                  </div>
+                  <input type="text" name="name" class="form-control" id="inlineFormInputGroup"
+                    placeholder="Student Name">
                 </div>
-                <input type="text" name="name" class="form-control" id="inlineFormInputGroup"
-                  placeholder="Student Name">
               </div>
-            </div>
 
-            <div class="col-auto">
-              <label class="inputPassword3" for="inlineFormInputGroup"></label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+              <div class="col-12">
+                <label class="inputPassword3" for="inlineFormInputGroup"></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fas fa-calendar"></i></div>
+                  </div>
+                  <input type="text" name="course" class="form-control" id="inputPassword3" placeholder="Course">
                 </div>
-                <input type="text" name="course" class="form-control" id="inputPassword3" placeholder="Course">
               </div>
-            </div>
 
-            <div class="col-auto">
-              <label class="grade" for="inlineFormInputGroup"></label>
-              <div class="input-group mb-2">
-                <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fas fa-graduation-cap"></i></div>
+              <div class="col-12">
+                <label class="grade" for="inlineFormInputGroup"></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fas fa-graduation-cap"></i></div>
+                  </div>
+                  <input type="text" name="grade" class="form-control" id="grade" placeholder="Grade">
                 </div>
-                <input type="text" name="grade" class="form-control" id="grade" placeholder="Grade">
               </div>
-            </div>
 
-            <div class="form-group">
-              <div class="row col-auto justify-content-end">
-                <button type="submit" class="btn btn-success">Add</button>
-                <button type="reset" class="btn btn-outline-dark">Cancel</button>
+              <div class="col-12 form-group mt-3">
+                  <button type="submit" class="btn btn-success">Add</button>
+                  <button type="reset" class="btn btn-outline-dark">Cancel</button>
               </div>
-            </div>
-          </form>
-
-
-
-        </div>
+            </form>
+          </div>
       </div>
     </div>
   </div>

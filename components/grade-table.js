@@ -7,10 +7,10 @@ class GradeTable {
     var tbody = this.tableElement.querySelector("tbody");
     tbody.innerHTML = ""
     for (var i = 0; i < grades.length; i++) {
-      var tr = this.renderGradeRow(grades[i], this.deleteGrade);
+      var tr = this.renderGradeRow(grades[i], this.deleteGrade, this.editGrade);
       tbody.append(tr)
     }
-var p = document.querySelector('p');
+    var p = document.querySelector('p');
     if (grades.length) {
       p.className = "d-none";
     } else {
@@ -20,25 +20,34 @@ var p = document.querySelector('p');
   onDeleteClick(deleteGrade) {
     this.deleteGrade = deleteGrade;
   }
-  renderGradeRow(data, deleteGrade) {
+  onEditClick(editGrade) {
+    this.editGrade = editGrade;
+  }
+  renderGradeRow(data, deleteGrade, editGrade) {
     var tr = document.createElement("tr")
     var tdName = document.createElement("td")
     var tdCourse = document.createElement("td")
     var tdGrade = document.createElement("td")
-    var tdButton = document.createElement("td")
-    var button = document.createElement("button")
+    var buttonContainer = document.createElement("td")
+    var deleteBtn = document.createElement("button")
+    var edit = document.createElement("button")
 
     tdName.textContent = data.name;
     tdCourse.textContent = data.course;
     tdGrade.textContent = data.grade;
-    button.className = "btn btn-danger";
-    button.textContent = "DELETE"
-    button.addEventListener("click", function () {
+    deleteBtn.className = "btn btn-link text-danger";
+    deleteBtn.innerHTML = "<i class=\"fas fa-trash-alt\"></i>"
+    edit.className = "btn btn-link text-info";
+    edit.innerHTML = "<i class=\"fas fa-edit\"></i>"
+    deleteBtn.addEventListener("click", function () {
       deleteGrade(data.id)
     });
-    tdButton.append(button);
+    edit.addEventListener("click", function(){
+      editGrade(data)
+    })
+    buttonContainer.append(edit, deleteBtn);
 
-    tr.append(tdName, tdCourse, tdGrade, tdButton);
+    tr.append(tdName, tdCourse, tdGrade, buttonContainer);
 
 
     return tr

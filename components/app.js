@@ -42,9 +42,9 @@ class App {
   start() {
     this.getGrades();
     this.gradeForm.onSubmit(this.createGrade);
-    this.gradeForm.onUpdate(this.updateGrade);
+    this.gradeForm.onEditGrade(this.editGrade);
     this.gradeTable.onDeleteClick(this.deleteGrade);
-    this.gradeTable.onEditClick(this.editGrade);
+    this.gradeTable.onEditClick(this.gradeForm.setFormValue);
 
   }
   handleCreateGradeError(error) {
@@ -88,18 +88,14 @@ class App {
     this.getGrades();
   }
 
-  editGrade(data) {
-    this.gradeForm.setFormValue(data);
-  }
   handleEditGradeError(error) {
     console.error();
   }
   handleEditGradeSuccess() {
-    console.log("success")
     this.getGrades();
   }
 
-  updateGrade(id, name, course, grade) {
+  editGrade(id, name, course, grade) {
     var appConfig = {
       type: "PATCH",
       headers: {

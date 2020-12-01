@@ -2,7 +2,7 @@ class GradeTable {
   constructor(tableElement, noGradesElement) {
     this.tableElement = tableElement;
     this.noGradesElement = noGradesElement;
-  }
+    }
   updateGrades(grades) {
     var tbody = this.tableElement.querySelector("tbody");
     tbody.innerHTML = ""
@@ -20,8 +20,8 @@ class GradeTable {
   onDeleteClick(deleteGrade) {
     this.deleteGrade = deleteGrade;
   }
-  onEditClick(editGrade) {
-    this.editGrade = editGrade;
+  onEditClick(setFormValue) {
+    this.setFormValue = setFormValue;
   }
   renderGradeRow(data, deleteGrade, editGrade) {
     var tr = document.createElement("tr")
@@ -43,7 +43,7 @@ class GradeTable {
       deleteGrade(data.id)
     });
     edit.addEventListener("click", function(){
-      editGrade(data)
+      setFormValue(data)
     })
     buttonContainer.append(edit, deleteBtn);
 

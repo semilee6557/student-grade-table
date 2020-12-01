@@ -10,7 +10,7 @@ class App {
       total += grades[i].grade
     }
     var average = total / grades.length;
-    this.pagerHeader.updateAverage(average);
+    this.pagerHeader.updateAverage(parseInt(average));
   }
   constructor(gradeTable, pagerHeader, gradeForm) {
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
@@ -111,5 +111,4 @@ class App {
     };
     $.ajax("https://sgt.lfzprototypes.com/api/grades/" + id, appConfig)
   }
-
 }

@@ -18,7 +18,7 @@ class GradeForm {
     var formData = new FormData(event.target);
     var dataName = formData.get('name');
     var dataCourse = formData.get('course');
-    var dataGrade = formData.get('grade');
+    var dataGrade = parseInt(formData.get('grade'));
 
     if (Object.keys(this.currentData).length) {
 

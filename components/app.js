@@ -5,13 +5,7 @@ class App {
   }
   handleGetGradesSuccess(grades) {
     this.cachedGrades = grades;
-    this.gradeTable.updateGrades(grades);
-    var total = 0;
-    for (var i = 0; i < grades.length; i++) {
-      total += grades[i].grade
-    }
-    var average = total / grades.length;
-    this.pagerHeader.updateAverage(parseInt(average));
+    this.success()
   }
   constructor(gradeTable, pagerHeader, gradeForm) {
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
@@ -29,6 +23,7 @@ class App {
     this.handleEditGradeSuccess = this.handleEditGradeSuccess.bind(this);
     this.editGrade = this.editGrade.bind(this);
     this.cachedGrades = [];
+    this.success = this.success.bind(this);
   }
   getGrades() {
     var ajaxConfig = {
@@ -56,22 +51,23 @@ class App {
       }
     }
   }
-  success(grades) {
-    this.gradeTable.updateGrades(grades);
+  success() {
+    this.gradeTable.updateGrades(this.cachedGrades);
     var total = 0;
-    for (var i = 0; i < grades.length; i++) {
-      total += grades[i].grade
+    for (var i = 0; i < this.cachedGrades.length; i++) {
+      total += this.cachedGrades[i].grade
     }
-    var average = total / grades.length;
+    var average = total / this.cachedGrades.length;
     this.pagerHeader.updateAverage(parseInt(average));
-
   }
   handleCreateGradeError(error) {
     console.error()
   }
   handleCreateGradeSuccess(grade) {
+    grade.grade = parseInt(grade.grade)
+    console.log("POST", typeof grade.grade)
     this.cachedGrades.push(grade);
-    this.success(this.cachedGrades)
+    this.success()
   }
   createGrade(name, course, grade) {
     var ajaxConfig = {
@@ -107,7 +103,7 @@ class App {
   handleDeleteGradeSuccess(id) {
     var index = this.findIndexwithId(id);
     this.cachedGrades.splice(index, 1);
-    this.success(this.cachedGrades)
+    this.success()
 
   }
 
@@ -117,7 +113,7 @@ class App {
   handleEditGradeSuccess(grade) {
     var index = this.findIndexwithId(grade.id);
     this.cachedGrades[index] = grade;
-    this.success(this.cachedGrades)
+    this.success()
 
   }
 

@@ -10,7 +10,7 @@ class App {
       total += grades[i].grade
     }
     var average = total / grades.length;
-    this.pagerHeader.updateAverage(average);
+    this.pagerHeader.updateAverage(parseInt(average));
   }
   constructor(gradeTable, pagerHeader, gradeForm) {
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
@@ -24,6 +24,9 @@ class App {
     this.deleteGrade = this.deleteGrade.bind(this);
     this.handleDeleteGradeError = this.handleDeleteGradeError.bind(this);
     this.handleDeleteGradeSuccess = this.handleDeleteGradeSuccess.bind(this);
+    this.handleEditGradeError = this.handleEditGradeError.bind(this);
+    this.handleEditGradeSuccess = this.handleEditGradeSuccess.bind(this);
+    this.editGrade = this.editGrade.bind(this);
   }
   getGrades() {
     var ajaxConfig = {
@@ -39,7 +42,10 @@ class App {
   start() {
     this.getGrades();
     this.gradeForm.onSubmit(this.createGrade);
-    this.gradeTable.onDeleteClick(this.deleteGrade)
+    this.gradeForm.onEditGrade(this.editGrade);
+    this.gradeTable.onDeleteClick(this.deleteGrade);
+    this.gradeTable.onEditClick(this.gradeForm.setFormValue);
+
   }
   handleCreateGradeError(error) {
     console.error()
@@ -74,10 +80,31 @@ class App {
     };
     $.ajax("https://sgt.lfzprototypes.com/api/grades/" + id, appConfig)
   }
+
   handleDeleteGradeError(error) {
     console.error();
   }
   handleDeleteGradeSuccess() {
     this.getGrades();
+  }
+
+  handleEditGradeError(error) {
+    console.error();
+  }
+  handleEditGradeSuccess() {
+    this.getGrades();
+  }
+
+  editGrade(id, data) {
+    var appConfig = {
+      type: "PATCH",
+      headers: {
+        "X-Access-Token": "jpVhjpBr"
+      },
+      success: this.handleEditGradeSuccess,
+      error: this.handleEditGradeError,
+      data: data,
+    };
+    $.ajax("https://sgt.lfzprototypes.com/api/grades/" + id, appConfig)
   }
 }

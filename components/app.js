@@ -58,6 +58,7 @@ class App {
       total += this.cachedGrades[i].grade
     }
     var average = total / this.cachedGrades.length;
+
     this.pagerHeader.updateAverage(parseInt(average));
   }
   handleCreateGradeError(error) {
@@ -65,7 +66,6 @@ class App {
   }
   handleCreateGradeSuccess(grade) {
     grade.grade = parseInt(grade.grade)
-    console.log("POST", typeof grade.grade)
     this.cachedGrades.push(grade);
     this.success()
   }

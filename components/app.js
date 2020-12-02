@@ -95,7 +95,7 @@ class App {
     this.getGrades();
   }
 
-  editGrade(id, name, course, grade) {
+  editGrade(id, data) {
     var appConfig = {
       type: "PATCH",
       headers: {
@@ -103,11 +103,7 @@ class App {
       },
       success: this.handleEditGradeSuccess,
       error: this.handleEditGradeError,
-      data: {
-        name: name,
-        course: course,
-        grade: grade
-      },
+      data: data,
     };
     $.ajax("https://sgt.lfzprototypes.com/api/grades/" + id, appConfig)
   }

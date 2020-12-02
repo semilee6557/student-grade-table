@@ -3,7 +3,7 @@ class GradeForm {
     this.formElement = formElement;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.setFormValue = this.setFormValue.bind(this);
-    this.currentId = 0;
+    this.currentData = {};
     this.formElement.addEventListener('submit', this.handleSubmit)
   }
 
@@ -20,9 +20,19 @@ class GradeForm {
     var dataCourse = formData.get('course');
     var dataGrade = formData.get('grade');
 
-    if (this.currentId) {
-      this.editGrade(this.currentId, dataName, dataCourse, dataGrade)
-          this.currentId = 0
+    if (Object.keys(this.currentData).length) {
+
+        var obj = {}
+        if(dataName!==this.currentData.name){
+         obj.name = dataName;
+        } if(dataCourse!==this.currentData.course){
+         obj.course = dataCourse;
+        } if(dataGrade!==this.currentData.grade){
+         obj.grade = dataGrade;
+        }
+
+      this.editGrade(this.currentData.id, obj)
+      this.currentData = {}
 
     } else{
       this.createGrade(dataName, dataCourse, dataGrade);
@@ -31,7 +41,7 @@ class GradeForm {
   }
 
   setFormValue(data) {
-    this.currentId = data.id;
+    this.currentData = data;
     this.formElement.name.value = data.name;
     this.formElement.course.value = data.course;
     this.formElement.grade.value = data.grade;

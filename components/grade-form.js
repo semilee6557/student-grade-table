@@ -12,7 +12,6 @@ class GradeForm {
   }
   onEditGrade(editGrade) {
     this.editGrade = editGrade;
-    this.currentId = 0
   }
   handleSubmit(event) {
     event.preventDefault();
@@ -23,6 +22,8 @@ class GradeForm {
 
     if (this.currentId) {
       this.editGrade(this.currentId, dataName, dataCourse, dataGrade)
+          this.currentId = 0
+
     } else{
       this.createGrade(dataName, dataCourse, dataGrade);
     }

@@ -4,6 +4,7 @@ class App {
     console.error(error);
   }
   handleGetGradesSuccess(grades) {
+    this.cachedGrades = grades;
     this.gradeTable.updateGrades(grades);
     var total = 0;
     for (var i = 0; i < grades.length; i++) {
@@ -27,6 +28,7 @@ class App {
     this.handleEditGradeError = this.handleEditGradeError.bind(this);
     this.handleEditGradeSuccess = this.handleEditGradeSuccess.bind(this);
     this.editGrade = this.editGrade.bind(this);
+    this.cachedGrades = [];
   }
   getGrades() {
     var ajaxConfig = {
@@ -47,11 +49,29 @@ class App {
     this.gradeTable.onEditClick(this.gradeForm.setFormValue);
 
   }
+  findIndexwithId(id) {
+    for (var i = 0; i < this.cachedGrades.length; i++) {
+      if (id === this.cachedGrades[i].id) {
+        return i
+      }
+    }
+  }
+  success(grades) {
+    this.gradeTable.updateGrades(grades);
+    var total = 0;
+    for (var i = 0; i < grades.length; i++) {
+      total += grades[i].grade
+    }
+    var average = total / grades.length;
+    this.pagerHeader.updateAverage(parseInt(average));
+
+  }
   handleCreateGradeError(error) {
     console.error()
   }
-  handleCreateGradeSuccess() {
-    this.getGrades()
+  handleCreateGradeSuccess(grade) {
+    this.cachedGrades.push(grade);
+    this.success(this.cachedGrades)
   }
   createGrade(name, course, grade) {
     var ajaxConfig = {
@@ -75,7 +95,7 @@ class App {
       headers: {
         "X-Access-Token": "jpVhjpBr"
       },
-      success: this.handleDeleteGradeSuccess,
+      success: this.handleDeleteGradeSuccess(id),
       error: this.handleDeleteGradeError
     };
     $.ajax("https://sgt.lfzprototypes.com/api/grades/" + id, appConfig)
@@ -84,15 +104,21 @@ class App {
   handleDeleteGradeError(error) {
     console.error();
   }
-  handleDeleteGradeSuccess() {
-    this.getGrades();
+  handleDeleteGradeSuccess(id) {
+    var index = this.findIndexwithId(id);
+    this.cachedGrades.splice(index, 1);
+    this.success(this.cachedGrades)
+
   }
 
   handleEditGradeError(error) {
     console.error();
   }
-  handleEditGradeSuccess() {
-    this.getGrades();
+  handleEditGradeSuccess(grade) {
+    var index = this.findIndexwithId(grade.id);
+    this.cachedGrades[index] = grade;
+    this.success(this.cachedGrades)
+
   }
 
   editGrade(id, data) {

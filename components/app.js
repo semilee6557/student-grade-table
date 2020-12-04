@@ -4,13 +4,8 @@ class App {
     console.error(error);
   }
   handleGetGradesSuccess(grades) {
-    this.gradeTable.updateGrades(grades);
-    var total = 0;
-    for (var i = 0; i < grades.length; i++) {
-      total += grades[i].grade
-    }
-    var average = total / grades.length;
-    this.pagerHeader.updateAverage(parseInt(average));
+    this.cachedGrades = grades;
+    this.success()
   }
   constructor(gradeTable, pagerHeader, gradeForm) {
     this.handleGetGradesError = this.handleGetGradesError.bind(this);
@@ -27,6 +22,8 @@ class App {
     this.handleEditGradeError = this.handleEditGradeError.bind(this);
     this.handleEditGradeSuccess = this.handleEditGradeSuccess.bind(this);
     this.editGrade = this.editGrade.bind(this);
+    this.cachedGrades = [];
+    this.success = this.success.bind(this);
   }
   getGrades() {
     var ajaxConfig = {
@@ -47,11 +44,30 @@ class App {
     this.gradeTable.onEditClick(this.gradeForm.setFormValue);
 
   }
-  handleCreateGradeError(error) {
-    console.error()
+  findIndexwithId(id) {
+    for (var i = 0; i < this.cachedGrades.length; i++) {
+      if (id === this.cachedGrades[i].id) {
+        return i
+      }
+    }
   }
-  handleCreateGradeSuccess() {
-    this.getGrades()
+  success() {
+    this.gradeTable.updateGrades(this.cachedGrades);
+    var total = 0;
+    for (var i = 0; i < this.cachedGrades.length; i++) {
+      total += this.cachedGrades[i].grade
+    }
+    var average = total / this.cachedGrades.length;
+
+    this.pagerHeader.updateAverage(parseInt(average));
+  }
+  handleCreateGradeError(error) {
+    console.error(error)
+  }
+  handleCreateGradeSuccess(grade) {
+    grade.grade = parseInt(grade.grade)
+    this.cachedGrades.push(grade);
+    this.success()
   }
   createGrade(name, course, grade) {
     var ajaxConfig = {
@@ -75,24 +91,30 @@ class App {
       headers: {
         "X-Access-Token": "jpVhjpBr"
       },
-      success: this.handleDeleteGradeSuccess,
+      success: this.handleDeleteGradeSuccess.bind(null, id),
       error: this.handleDeleteGradeError
     };
     $.ajax("https://sgt.lfzprototypes.com/api/grades/" + id, appConfig)
   }
 
   handleDeleteGradeError(error) {
-    console.error();
+    console.error(error);
   }
-  handleDeleteGradeSuccess() {
-    this.getGrades();
+  handleDeleteGradeSuccess(id) {
+    var index = this.findIndexwithId(id);
+    this.cachedGrades.splice(index, 1);
+    this.success()
+
   }
 
   handleEditGradeError(error) {
-    console.error();
+    console.error(error);
   }
-  handleEditGradeSuccess() {
-    this.getGrades();
+  handleEditGradeSuccess(grade) {
+    var index = this.findIndexwithId(grade.id);
+    this.cachedGrades[index] = grade;
+    this.success()
+
   }
 
   editGrade(id, data) {

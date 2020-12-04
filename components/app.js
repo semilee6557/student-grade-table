@@ -91,7 +91,7 @@ class App {
       headers: {
         "X-Access-Token": "jpVhjpBr"
       },
-      success: this.handleDeleteGradeSuccess(id),
+      success: this.handleDeleteGradeSuccess,
       error: this.handleDeleteGradeError
     };
     $.ajax("https://sgt.lfzprototypes.com/api/grades/" + id, appConfig)

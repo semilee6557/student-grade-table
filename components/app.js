@@ -62,7 +62,7 @@ class App {
     this.pagerHeader.updateAverage(parseInt(average));
   }
   handleCreateGradeError(error) {
-    console.error()
+    console.error(error)
   }
   handleCreateGradeSuccess(grade) {
     grade.grade = parseInt(grade.grade)
@@ -98,7 +98,7 @@ class App {
   }
 
   handleDeleteGradeError(error) {
-    console.error();
+    console.error(error);
   }
   handleDeleteGradeSuccess(id) {
     var index = this.findIndexwithId(id);
@@ -108,7 +108,7 @@ class App {
   }
 
   handleEditGradeError(error) {
-    console.error();
+    console.error(error);
   }
   handleEditGradeSuccess(grade) {
     var index = this.findIndexwithId(grade.id);

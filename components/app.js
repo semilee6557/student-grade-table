@@ -30,11 +30,8 @@ class App {
       method: "GET",
       success: this.handleGetGradesSuccess,
       error: this.handleGetGradesError,
-      headers: {
-        "X-Access-Token": "jpVhjpBr"
-      }
     }
-    $.ajax("https://sgt.lfzprototypes.com/api/grades", ajaxConfig)
+    $.ajax("http://localhost:3000/api/grades", ajaxConfig)
   }
   start() {
     this.getGrades();
@@ -55,7 +52,7 @@ class App {
     this.gradeTable.updateGrades(this.cachedGrades);
     var total = 0;
     for (var i = 0; i < this.cachedGrades.length; i++) {
-      total += this.cachedGrades[i].grade
+      total += this.cachedGrades[i].score
     }
     var average = total / this.cachedGrades.length;
 
@@ -65,7 +62,7 @@ class App {
     console.error(error)
   }
   handleCreateGradeSuccess(grade) {
-    grade.grade = parseInt(grade.grade)
+    grade.score = parseInt(grade.score)
     this.cachedGrades.push(grade);
     this.success()
   }
@@ -74,27 +71,21 @@ class App {
       method: "POST",
       success: this.handleCreateGradeSuccess,
       error: this.handleCreateGradeError,
-      headers: {
-        "X-Access-Token": "jpVhjpBr"
-      },
       data: {
         name: name,
         course: course,
-        grade: grade
+        score: grade
       }
     }
-    $.ajax("https://sgt.lfzprototypes.com/api/grades", ajaxConfig)
+    $.ajax("http://localhost:3000/api/grades", ajaxConfig)
   }
   deleteGrade(id) {
     var appConfig = {
       type: "DELETE",
-      headers: {
-        "X-Access-Token": "jpVhjpBr"
-      },
       success: this.handleDeleteGradeSuccess.bind(null, id),
       error: this.handleDeleteGradeError
     };
-    $.ajax("https://sgt.lfzprototypes.com/api/grades/" + id, appConfig)
+    $.ajax("http://localhost:3000/api/grades" + id, appConfig)
   }
 
   handleDeleteGradeError(error) {
@@ -120,13 +111,10 @@ class App {
   editGrade(id, data) {
     var appConfig = {
       type: "PATCH",
-      headers: {
-        "X-Access-Token": "jpVhjpBr"
-      },
       success: this.handleEditGradeSuccess,
       error: this.handleEditGradeError,
-      data: data,
+      score: data,
     };
-    $.ajax("https://sgt.lfzprototypes.com/api/grades/" + id, appConfig)
+    $.ajax("http://localhost:3000/api/grades" + id, appConfig)
   }
 }

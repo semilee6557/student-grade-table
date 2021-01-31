@@ -34,7 +34,7 @@ class GradeTable {
 
     tdName.textContent = data.name;
     tdCourse.textContent = data.course;
-    tdGrade.textContent = data.grade;
+    tdGrade.textContent = data.score;
     deleteBtn.className = "btn btn-link text-danger";
     deleteBtn.innerHTML = "<i class=\"fas fa-trash-alt\"></i>"
     edit.className = "btn btn-link text-info";

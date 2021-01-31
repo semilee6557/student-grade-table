@@ -27,8 +27,8 @@ class GradeForm {
          obj.name = dataName;
         } if(dataCourse!==this.currentData.course){
          obj.course = dataCourse;
-        } if(dataGrade!==this.currentData.grade){
-         obj.grade = dataGrade;
+        } if(dataGrade!==this.currentData.score){
+         obj.score = dataGrade;
         }
 
       this.editGrade(this.currentData.id, obj)
@@ -44,6 +44,6 @@ class GradeForm {
     this.currentData = data;
     this.formElement.name.value = data.name;
     this.formElement.course.value = data.course;
-    this.formElement.grade.value = data.grade;
+    this.formElement.score.value = data.score;
   }
 }

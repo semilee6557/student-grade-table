@@ -7,7 +7,7 @@ class GradeTable {
     var tbody = this.tableElement.querySelector("tbody");
     tbody.innerHTML = ""
     for (var i = 0; i < grades.length; i++) {
-      var tr = this.renderGradeRow(grades[i], this.deleteGrade, this.editGrade);
+      var tr = this.renderGradeRow(grades[i], this.deleteGrade, this.setFormValue);
       tbody.append(tr)
     }
     var p = document.querySelector('p');
@@ -20,10 +20,11 @@ class GradeTable {
   onDeleteClick(deleteGrade) {
     this.deleteGrade = deleteGrade;
   }
-  onEditClick(editGrade) {
-    this.editGrade = editGrade;
+  onEditClick(setFormValue) {
+    this.setFormValue = setFormValue;
   }
-  renderGradeRow(data, deleteGrade, editGrade) {
+  renderGradeRow(data, deleteGrade, setFormValue) {
+    console.log(data)
     var tr = document.createElement("tr")
     var tdName = document.createElement("td")
     var tdCourse = document.createElement("td")
@@ -39,12 +40,12 @@ class GradeTable {
     deleteBtn.innerHTML = "<i class=\"fas fa-trash-alt\"></i>"
     edit.className = "btn btn-link text-info";
     edit.innerHTML = "<i class=\"fas fa-edit\"></i>"
-    deleteBtn.addEventListener("click", function () {
-      deleteGrade(data.id)
-    });
     edit.addEventListener("click", function(){
-      editGrade(data)
+      setFormValue(data)
     })
+    deleteBtn.addEventListener("click", function () {
+      deleteGrade(data.gradeId)
+    });
     buttonContainer.append(edit, deleteBtn);
 
     tr.append(tdName, tdCourse, tdGrade, buttonContainer);

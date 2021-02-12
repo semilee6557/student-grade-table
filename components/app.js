@@ -43,7 +43,7 @@ class App {
   }
   findIndexwithId(id) {
     for (var i = 0; i < this.cachedGrades.length; i++) {
-      if (id === this.cachedGrades[i].id) {
+      if (id === this.cachedGrades[i].gradeId) {
         return i
       }
     }
@@ -71,11 +71,12 @@ class App {
       method: "POST",
       success: this.handleCreateGradeSuccess,
       error: this.handleCreateGradeError,
-      data: {
+      contentType: 'application/json',
+      data: JSON.stringify({
         name: name,
         course: course,
         score: grade
-      }
+      })
     }
     $.ajax("http://localhost:3000/api/grades", ajaxConfig)
   }
@@ -85,7 +86,7 @@ class App {
       success: this.handleDeleteGradeSuccess.bind(null, id),
       error: this.handleDeleteGradeError
     };
-    $.ajax("http://localhost:3000/api/grades" + id, appConfig)
+    $.ajax("http://localhost:3000/api/grades/" + id, appConfig)
   }
 
   handleDeleteGradeError(error) {
@@ -102,9 +103,10 @@ class App {
     console.error(error);
   }
   handleEditGradeSuccess(grade) {
-    var index = this.findIndexwithId(grade.id);
+    var index = this.findIndexwithId(grade.gradeId);
     this.cachedGrades[index] = grade;
     this.success()
+    console.log(grade)
 
   }
 
@@ -113,8 +115,9 @@ class App {
       type: "PATCH",
       success: this.handleEditGradeSuccess,
       error: this.handleEditGradeError,
-      score: data,
+      contentType: 'application/json',
+      data: JSON.stringify(data),
     };
-    $.ajax("http://localhost:3000/api/grades" + id, appConfig)
+    $.ajax("http://localhost:3000/api/grades/" + id, appConfig)
   }
 }

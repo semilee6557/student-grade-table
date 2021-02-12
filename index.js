@@ -60,7 +60,7 @@ app.post('/api/grades', (req, res) => {
     });
 });
 
-app.put('/api/grades/:gradeId', (req, res) => {
+app.patch('/api/grades/:gradeId', (req, res) => {
 
   const gradeId = parseInt(req.params.gradeId, 10);
   const newGrade = req.body;
